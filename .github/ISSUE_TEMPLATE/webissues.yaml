@@ -110,4 +110,5 @@ body:
       description: Please put in steps how can we reproduce the issue you're referring to.
       placeholder: "1. Go to https://www.safcodental.com \n
       2. Hover over Products Menu \n
-      3. Unable to see the list while logged in."
+      3. Unable to see the list while logged in. \n\n
+      you can also upload any screenshots here."

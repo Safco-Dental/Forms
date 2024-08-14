@@ -48,7 +48,7 @@ body:
     id: short-description
     attributes:
       label: Short Description
-      description: Tell us about your request (issues, improvements, etc.)
+      description: Tell us about your request (issues, improvements, etc.), you can also upload any screenshots here.
     validations:
       required: true
   - type: textarea
@@ -62,10 +62,9 @@ body:
     id: related-project
     attributes:
       label: Related Project
-      description: Where did you see this issue?
+      description: Where this feature should be implemented?
       options:
         - Main Website
-        - Beta
         - Hubspot
         - Internal App
         - Background Process
