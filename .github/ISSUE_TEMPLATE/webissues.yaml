@@ -25,33 +25,74 @@ body:
       placeholder: e.g mkirolos@safcodental.com
     validations:
       required: true
-  - type: date
+  - type: input
     id: date-of-issue
     attributes:
       label: Date of Issue
       description: When the first time you saw this happening
     validations:
-      required: true
+      required: true  
+  - type: dropdown
+    id: headline
+    attributes:
+      label: Issue Headline
+      description: Please Choose from below what category this issue is about.
+      multiple: false
+      options:
+        - Login
+        - Search
+        - Cart
+        - Promo
+        - Navigation
+        - Others
   - type: textarea
     id: what-happened
     attributes:
-      label: START HERE(What happened?)
+      label: What happened?
       description: Also tell us, what did you expect to happen?
       placeholder: Tell us what you see!
-      value: "A bug happened!"
     validations:
       required: true
   - type: dropdown
-    id: version
+    id: related-project
     attributes:
-      label: Version
-      description: What version of our software are you running?
+      label: Related Project
+      description: Where did you see this issue?
       options:
-        - 1.0.2 (Default)
-        - 1.0.3 (Edge)
+        - Main Website
+        - Beta
+        - Hubspot
+        - Internal App
+        - Background Process
       default: 0
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How fast this bug should be fixed?
+      options:
+        - High
+        - Medium
+        - Low
+      default: 2
     validations:
       required: true
+  - type: input
+    id: customer-data
+    attributes:
+      label: Customer Email Address or Account number
+      description: Customer reported this issue information
+      placeholder: e.g 30007
+    validations:
+      required: true
+  - type: input
+    id: order-number
+    attributes:
+      label: Order number
+      description: If Customer has a related order for the bug
+      placeholder: e.g 123456
+    validations:
+      required: false
   - type: dropdown
     id: browsers
     attributes:
@@ -63,16 +104,10 @@ body:
         - Safari
         - Microsoft Edge
   - type: textarea
-    id: logs
+    id: how-to-reproduce
     attributes:
-      label: Relevant log output
-      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
-      render: shell
-  - type: checkboxes
-    id: terms
-    attributes:
-      label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com). 
-      options:
-        - label: I agree to follow this project's Code of Conduct
-          required: true
+      label: How to reproduce the issue
+      description: Please put in steps how can we reproduce the issue you're referring to.
+      placeholder: "1. Go to https://www.safcodental.com \n
+      2. Hover over Products Menu \n
+      3. Unable to see the list while logged in."
