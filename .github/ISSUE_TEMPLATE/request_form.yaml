@@ -1,0 +1,92 @@
+name: Feature Request
+description: Request a new feature in on of our Apps.
+title: "[Feature]: "
+labels: ["bug", "enhancement"]
+assignees:
+  - mkirolos-safco
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this feature request form!
+  - id: contact-name
+    type: input
+    attributes:
+      label: Contact Name
+      description: Safco Employee name
+      placeholder: e.g Mario Kirolos
+    validations:
+      required: true
+  - type: input
+    id: contact-email
+    attributes:
+      label: Contact Email
+      description: Safco Employee email
+      placeholder: e.g mkirolos@safcodental.com
+    validations:
+      required: true
+  - type: dropdown
+    id: department
+    attributes:
+      label: Department
+      multiple: false
+      options:
+        - Accounting
+        - Creative
+        - Customer Service
+        - Distribution Center
+        - IT
+        - Marketing
+        - Purchasing / Product Development
+  - type: input
+    id: request-title
+    attributes:
+      label: Request Title
+    validations:
+      required: true  
+  - type: textarea
+    id: short-description
+    attributes:
+      label: Short Description
+      description: Tell us about your request (issues, improvements, etc.)
+    validations:
+      required: true
+  - type: textarea
+    id: benefits-outcomes
+    attributes:
+      label: Benefits/Outcomes
+      description: Tell us the expected benefit this will provide. Include benefits that affect other departments as well.
+    validations:
+      required: true
+  - type: dropdown
+    id: related-project
+    attributes:
+      label: Related Project
+      description: Where did you see this issue?
+      options:
+        - Main Website
+        - Beta
+        - Hubspot
+        - Internal App
+        - Background Process
+      default: 0
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How fast this bug should be fixed?
+      options:
+        - High
+        - Medium
+        - Low
+      default: 2
+    validations:
+      required: true
+  - type: input
+    id: requested-completion-date
+    attributes:
+      label: Requested Completion Date
+      description: If applicable, please add a date you request to have this completed by. Please note that this does not guarantee completion - it is a suggested date.
+      placeholder: e.g Nov 1
+    validations:
+      required: false
