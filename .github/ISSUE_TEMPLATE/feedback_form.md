@@ -2,10 +2,11 @@
 name: Feedback Form
 about: Provide your feedback
 title: ''
-labels: feedback
+labels: ''
 assignees: ''
 
 ---
+
 **Name:**
 
 **Email:**
