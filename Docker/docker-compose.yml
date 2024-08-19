@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  app:
+    image: safcodental/github-forms-submission
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - GH_TOKEN
+        - PORT
+    container_name: github-forms-submission
+    ports:
+      - "${PORT}:${PORT}"
+    env_file:
+      - .env
+    volumes:
+      - ./server:/app
+      - /app/node_modules
