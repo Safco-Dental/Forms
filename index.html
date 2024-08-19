@@ -13,6 +13,7 @@
             padding:30px 0;
         }
     </style>
+    <link rel="icon" type="image/x-icon" href="./favicon.png">
 </head>
 <body>
 
@@ -33,7 +34,7 @@
             </nav>
 
 
-            <form id="issueForm" action="https://api.github.com/repos/Safco-Dental/Forms/issues" method="POST">
+            <form id="issueForm" action="https://api.safcodental.com/forms-submission/submit-issue" method="POST">
                 <div class="mb-3">
                     <label for="bug_title" class="form-label">Bug Title <span class="text-danger" >*</span></label>
                     <input type="text" class="form-control" id="bug_title" placeholder="Bug Title" required />
@@ -164,11 +165,10 @@
             const formTemplate = `## Bug Report\n\n**Title**: ${title}\n\n**Safco Employee Name**: ${safco_employee_name}\n\n**Safco Employee Email**: ${safco_employee_email}\n\n**Date of Issue**: ${date_of_issue}\n\n**Issue Headline**: ${issue_headline}\n\n**What happened**:\n ${what_happend}\n\n**Related Project**: ${related_project}\n\n**Priority**: ${priority}\n\n**Customer Number or Email**: ${customer_number_or_email}\n\n**Order Number**: ${order_number}\n\n**Browser of Issue**: ${browser_of_isse}\n\n**Steps to Reproduce**:\n ${steps_to_reproduce}`;
 
 
-            const response = await fetch('https://api.github.com/repos/Safco-Dental/Forms/issues', {
+            const response = await fetch('https://api.safcodental.com/forms-submission/submit-issue', {
                 method: 'POST',
                 headers: {
-                    'Authorization': 'token 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',
-                    'Accept': 'application/vnd.github.v3+json'
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     title: '[Bug]: ' + title,
