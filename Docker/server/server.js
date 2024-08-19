@@ -7,7 +7,7 @@ app.use(express.json());
 
 
 var corsOptions = {
-  origin: 'https://safco-dental.github.io/Forms/',
+  origin: 'https://safco-dental.github.io',
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
@@ -16,18 +16,8 @@ app.use(cors(corsOptions))
 
 
 // Endpoint to handle form submissions
-app.post('/submit-issue', async (req, res) => {
+app.post('/forms-submission/submit-issue', async (req, res) => {
     const { title, body, labels, assignees } = req.body;  // Extract title and body from the request
-
-    console.log(`Title: ${title}`)
-    console.log(`Body: ${body}`)
-    console.log(`${process.env.GH_TOKEN}`)
-
-
-    console.log(req.body)
-
-
-
     try {
         // Make a POST request to GitHub API to create an issue
         const response = await axios.post(
