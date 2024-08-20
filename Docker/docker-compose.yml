@@ -12,6 +12,7 @@ services:
     container_name: github-forms-submission
     ports:
       - "${PORT}:${PORT}"
+    restart: always
     env_file:
       - .env
     volumes:
