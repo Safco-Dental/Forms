@@ -1,5 +1,5 @@
 # Use the official Node.js image from the Docker Hub
-FROM node:latest
+FROM node:22.7-bookworm-slim
 
 # Set environment variables
 ENV NODE_ENV=prod
