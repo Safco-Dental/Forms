@@ -5,12 +5,10 @@ const fs = require('fs');
 const path = require('path');
 const cors = require('cors')
 const multer = require('multer');
-
+require('dotenv').config()
 
 const baseUrl = process.env.BASE_URL || ''
 const baseUploadDir = 'uploads'
-
-
 
 const corsOptions = {
   origin: 'https://safco-dental.github.io',
@@ -36,8 +34,6 @@ const upload = multer({ storage: multer.diskStorage({
     }
 }) });
 
-
-require('dotenv').config()
 app.use(express.json());
 
 // Ensure the 'uploads' directory exists

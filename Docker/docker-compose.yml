@@ -18,3 +18,5 @@ services:
     volumes:
       - ./server:/app
       - /app/node_modules
+      - /app/uploads
+      - ${PUBLIC_IMAGE_DIRECTORY}:/app/uploads

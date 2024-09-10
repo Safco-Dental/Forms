@@ -33,8 +33,7 @@
             </nav>
 
 
-            <form id="featureRequestForm" action="https://api.safcodental.com/forms-submission/submit-issue" method="POST">
-
+            <form id="featureRequestForm" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="feature_title" class="form-label">Feature Title <span class="text-danger" >*</span></label>
                     <input type="text" class="form-control" id="feature_title" placeholder="Feature Title" required />
@@ -110,6 +109,13 @@
                     <input type="date" class="form-control" id="request_completion_date" placeholder="12/31/2024" required />
                 </div>
 
+                <div class="mb-3">
+                    <label for="files" class="form-label">Files</label>
+                    <input type="file" multiple name="files" id="files" />
+                    <small>Any Helpful information that would help us deliver faster</small>
+                </div>
+
+                <section id="response" class="alert"></section>
 
                 <button class="btn btn-info" type="submit">Submit Request</button>
             </form>
@@ -136,27 +142,22 @@
 
             const formTemplate = `## Feature Request\n\n**Title**: ${title}\n\n**Safco Employee Name**: ${safco_employee_name}\n\n**Safco Employee Email**: ${safco_employee_email}\n\n**Department**: ${department}\n\n**Request Title**: ${request_title}\n\n**Short Description**:\n ${short_desc}\n\n**Benefits/Outcomes**: ${benefits_outcomes}\n\n**Related Project**: ${related_project}\n\n**Priority**: ${priority}\n\n**Request Completion Date**: ${request_completion_date}\n\n`;
 
+            // Create FormData object
+            const formData = new FormData();
+            formData.append('title', '[Feature]: ' + title);
+            formData.append('body', formTemplate);
+            formData.append('assignees', 'mkirolos-safco');
+            formData.append('labels', 'enhancement');
 
-            const response = await fetch('https://api.safcodental.com/forms-submission/submit-issue', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    title: '[Feature]: ' + title,
-                    body: formTemplate,
-                    assignees: ['mkirolos-safco'],
-                    labels: ['enhancement']
-                })
-            });
-
-            if (response.ok) {
-                alert('Issue created successfully!');
-                form.reset();
-            } else {
-                alert('Failed to create issue.');
+            // Append files
+            const filesInput = document.getElementById('files');
+            for (const file of filesInput.files) {
+                formData.append('files', file);
             }
+
+            const response = await submitData(formData)
         });
     </script>
+    <script src="./script.js" ></script>
 </body>
 </html>
