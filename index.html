@@ -34,7 +34,7 @@
             </nav>
 
 
-            <form id="issueForm" action="https://api.safcodental.com/forms-submission/submit-issue" method="POST">
+            <form id="issueForm" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="bug_title" class="form-label">Bug Title <span class="text-danger" >*</span></label>
                     <input type="text" class="form-control" id="bug_title" placeholder="Bug Title" required />
@@ -134,6 +134,15 @@
 3- Unable to see the list while logged in"></textarea>
                 </div>
 
+
+                <div class="mb-3">
+                    <label for="files" class="form-label">Files</label>
+                    <input type="file" multiple name="files" id="files" />
+                    <small>Any Helpful information that would help us deliver faster</small>
+                </div>
+
+                <section id="response" class="alert"></section>
+
                 <button class="btn btn-info" type="submit">Submit Issue</button>
             </form>
         </section>
@@ -156,35 +165,27 @@
             const priority = document.getElementById('priority').value;
             const customer_number_or_email = document.getElementById('customer_number_or_email').value;
             const order_number = document.getElementById('order_number').value || 'N.A';
-            const browser_of_isse = Array.prototype.slice.call(document.querySelectorAll('#browser_of_isse option:checked'),0).map(function(v,i,a) {
-                return v.value;
-            }) || 'N.A';
+            const browser_of_isse = Array.from(document.querySelectorAll('#browser_of_isse option:checked')).map(option => option.value) || 'N.A';
             const steps_to_reproduce = document.getElementById('steps_to_reproduce').value;
-
 
             const formTemplate = `## Bug Report\n\n**Title**: ${title}\n\n**Safco Employee Name**: ${safco_employee_name}\n\n**Safco Employee Email**: ${safco_employee_email}\n\n**Date of Issue**: ${date_of_issue}\n\n**Issue Headline**: ${issue_headline}\n\n**What happened**:\n ${what_happend}\n\n**Related Project**: ${related_project}\n\n**Priority**: ${priority}\n\n**Customer Number or Email**: ${customer_number_or_email}\n\n**Order Number**: ${order_number}\n\n**Browser of Issue**: ${browser_of_isse}\n\n**Steps to Reproduce**:\n ${steps_to_reproduce}`;
 
+            // Create FormData object
+            const formData = new FormData();
+            formData.append('title', '[Bug]: ' + title);
+            formData.append('body', formTemplate);
+            formData.append('assignees', 'mkirolos-safco');
+            formData.append('labels', 'bug');
 
-            const response = await fetch('https://api.safcodental.com/forms-submission/submit-issue', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    title: '[Bug]: ' + title,
-                    body: formTemplate,
-                    assignees: ['mkirolos-safco'],
-                    labels: ['bug']
-                })
-            });
-
-            if (response.ok) {
-                alert('Issue created successfully!');
-                form.reset();
-            } else {
-                alert('Failed to create issue.');
+            // Append files
+            const filesInput = document.getElementById('files');
+            for (const file of filesInput.files) {
+                formData.append('files', file);
             }
+
+            const response = await submitData(formData)
         });
     </script>
+    <script src="./script.js" ></script>
 </body>
 </html>
